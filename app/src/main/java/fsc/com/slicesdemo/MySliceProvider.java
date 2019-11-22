@@ -19,6 +19,9 @@ import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
 public class MySliceProvider extends SliceProvider {
+
+    ListBuilder.InputRangeBuilder inputRangeBuilder;
+
     /**
      * Instantiate any required objects. Return true if the provider was successfully created,
      * false otherwise.
@@ -52,7 +55,7 @@ public class MySliceProvider extends SliceProvider {
                     .setAccentColor(Color.DKGRAY)//设置图标的颜色
                     .setHeader(new ListBuilder.HeaderBuilder().setTitle("标题")//Smaller格式下默认
                             .setSubtitle("副标题")
-                            .setSummary("摘要", false)//Smaller格式下如果同时设置了Summary和Subtitle，则只显示Summary
+                            .setSummary(null, true)//Smaller格式下如果同时设置了Summary和Subtitle，则只显示Summary
                     )
                     .addRow(new RowBuilder().setPrimaryAction(activityAction)
                             .setTitle("Home")
@@ -109,6 +112,20 @@ public class MySliceProvider extends SliceProvider {
                             .setTitle("Wi-Fi")
                             .setPrimaryAction(createActivityAction(sliceUri.getPath()))
                             .addEndItem(toggleAction)
+                    )
+                    .build();
+        } else if ("/range".equals(sliceUri.getPath())) {
+            System.out.println("hl-----range");
+            return new ListBuilder(getContext(), sliceUri, ListBuilder.INFINITY)
+                    .addRow(new RowBuilder()
+                            .setTitle("打开应用")
+                            .setPrimaryAction(createActivityAction("/range"))
+                    )
+                    .addInputRange(new ListBuilder.InputRangeBuilder()
+                            .setMax(100)
+                            .setInputAction(getPendingIntent("/range"))
+                            .setTitle("音量")
+                            .setValue(20)
                     )
                     .build();
         } else {
