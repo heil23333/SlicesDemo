@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fsc.com.slicesdemo">
+    package="fsc.com.palettedemo">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application
@@ -11,26 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaletteActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <provider
-            android:name=".MySliceProvider"
-            android:authorities="fsc.com.slicesdemo"
-            android:exported="true">
+        <activity android:name="fsc.com.palettedemo.PaletteActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.app.slice.category.SLICE" />
-
-                <data
-                    android:host="com.fsc"
-                    android:pathPrefix="/"
-                    android:scheme="http" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </provider>
+        </activity>
 
         <provider
-            android:authorities="fsc.com.slicesdemo.fileprovider"
+            android:authorities="fsc.com.palettedemo.fileprovider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true" >
@@ -38,14 +28,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

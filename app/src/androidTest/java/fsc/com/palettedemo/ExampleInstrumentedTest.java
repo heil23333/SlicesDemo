@@ -1,4 +1,4 @@
-package fsc.com.slicesdemo;
+package fsc.com.palettedemo;
 
 import android.content.Context;
 
